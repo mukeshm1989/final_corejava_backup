@@ -1,0 +1,5 @@
+package com.corejava.dto;
+
+public enum Rank {
+
+}

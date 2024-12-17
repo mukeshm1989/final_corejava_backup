@@ -1,0 +1,105 @@
+import java.util.*;
+
+public class RoadUpgrades {
+
+    public static List<Integer> minUpgrades(int numCities, int numRoads, int numTypes, List<Integer> fromCity, List<Integer> toCity, List<Integer> roadType) {
+        // Create a graph representation
+        List<List<int[]>> graph = new ArrayList<>();
+        for (int i = 0; i < numCities; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        // Populate the graph with roads
+        for (int i = 0; i < numRoads; i++) {
+            graph.get(fromCity.get(i)).add(new int[] { toCity.get(i), roadType.get(i) });
+            graph.get(toCity.get(i)).add(new int[] { fromCity.get(i), roadType.get(i) });
+        }
+
+        boolean[] visited = new boolean[numCities];
+        List<Integer> upgradesNeeded = new ArrayList<>();
+
+        // DFS to find connected components
+        for (int city = 0; city < numCities; city++) {
+            if (!visited[city]) {
+                int[] result = dfs(city, graph, visited, numTypes);
+                int totalRoads = result[0];
+                int[] roadsCount = Arrays.copyOfRange(result, 1, result.length);
+
+                // Calculate how many upgrades are needed
+                int maxRoadsOfOneType = 0;
+                for (int count : roadsCount) {
+                    maxRoadsOfOneType = Math.max(maxRoadsOfOneType, count);
+                }
+                int upgrades = totalRoads - maxRoadsOfOneType;
+                upgradesNeeded.add(upgrades);
+            }
+        }
+
+        return upgradesNeeded; // Return the list of upgrades needed
+    }
+
+    private static int[] dfs(int city, List<List<int[]>> graph, boolean[] visited, int numTypes) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(city);
+        int totalRoads = 0;
+        int[] roadsCount = new int[numTypes];
+
+        while (!stack.isEmpty()) {
+            int node = stack.pop();
+            if (visited[node]) {
+                continue;
+            }
+            visited[node] = true;
+
+            for (int[] neighbor : graph.get(node)) {
+                int neighborCity = neighbor[0];
+                int roadType = neighbor[1];
+
+                if (!visited[neighborCity]) {
+                    stack.push(neighborCity);
+                }
+                roadsCount[roadType]++;
+                totalRoads++;
+            }
+        }
+        // Return total roads and count of each type
+        int[] result = new int[roadsCount.length + 1];
+        result[0] = totalRoads; // Total roads
+        System.arraycopy(roadsCount, 0, result, 1, roadsCount.length);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input: numCities, numRoads, numTypes
+        int numCities = scanner.nextInt();
+        int numRoads = scanner.nextInt();
+        int numTypes = scanner.nextInt();
+
+        // Input: fromCity
+        List<Integer> fromCity = new ArrayList<>();
+        for (int i = 0; i < numRoads; i++) {
+            fromCity.add(scanner.nextInt());
+        }
+
+        // Input: toCity
+        List<Integer> toCity = new ArrayList<>();
+        for (int i = 0; i < numRoads; i++) {
+            toCity.add(scanner.nextInt());
+        }
+
+        // Input: roadType
+        List<Integer> roadType = new ArrayList<>();
+        for (int i = 0; i < numRoads; i++) {
+            roadType.add(scanner.nextInt());
+        }
+
+        // Calculate minimum upgrades needed
+        List<Integer> result = minUpgrades(numCities, numRoads, numTypes, fromCity, toCity, roadType);
+        
+        System.out.println("Minimum upgrades needed per connected component: " + result);
+
+        scanner.close();
+    }
+}

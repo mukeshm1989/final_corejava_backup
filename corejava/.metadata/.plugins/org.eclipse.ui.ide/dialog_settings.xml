@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+		</list>
+		<section name="NewWizard.dialogBounds">
+		</section>
+	</section>
+	<section name="org.eclipse.text.quicksearch.internal.ui.QuickSearchDialog.DIALOG_SETTINGS">
+		<item key="LAST_QUERY" value="package com.corejava;&#x0D;&#x0A;&#x0D;&#x0A;import java.util.ArrayList;&#x0D;&#x0A;import java.util.Comparator;&#x0D;&#x0A;import java.util.HashMap;&#x0D;&#x0A;import java.util.LinkedHashMap;&#x0D;&#x0A;import java.util.List;&#x0D;&#x0A;import java.util.Map;&#x0D;&#x0A;import java.util.Map.Entry;&#x0D;&#x0A;import java.util.stream.Collectors;&#x0D;&#x0A;import java.util.stream.Stream;&#x0D;&#x0A;&#x0D;&#x0A;import com.corejava.dto.Employee;&#x0D;&#x0A;&#x0D;&#x0A;public class SortMapStream {&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;public static void main(String[] args) {&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;Map&lt;Integer, Employee&gt; empMap = new HashMap&lt;Integer, Employee&gt;();&#x0D;&#x0A;&#x09;&#x09;empMap.put(1, new Employee(1, &quot;m&quot;, 30000.00));&#x0D;&#x0A;&#x09;&#x09;empMap.put(2, new Employee(1, &quot;a&quot;, 300.00));&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;//sortEmployee(empMap);&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;&#x09;Map&lt;Integer, String&gt; sortMap = new HashMap&lt;Integer, String&gt;();&#x0D;&#x0A;&#x09;&#x09;sortMap.put(1, &quot;mukesh&quot;);&#x0D;&#x0A;&#x09;&#x09;sortMap.put(2, &quot;test&quot;);&#x0D;&#x0A;&#x09;&#x09;sortMap.put(3, &quot;atest&quot;);&#x0D;&#x0A;&#x09;&#x09;sortMap.put(4, &quot;ntest&quot;);&#x0D;&#x0A;&#x09;&#x09;//sortMap(sortMap);&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;List&lt;Employee&gt; empList = new ArrayList&lt;Employee&gt;();&#x0D;&#x0A;&#x09;&#x09;empList.add(new Employee(1, &quot;ram&quot;, 1.0));&#x0D;&#x0A;&#x09;&#x09;empList.add(new Employee(1, &quot;aam&quot;, 1.0));&#x0D;&#x0A;&#x09;&#x09;empList.add(new Employee(1, &quot;shyam&quot;, 1.0));&#x0D;&#x0A;&#x09;&#x09;empList.add(new Employee(1, &quot;bam&quot;, 1.0));&#x0D;&#x0A;&#x09;&#x09;sortEmployeeListByNmae(empList);&#x0D;&#x0A;&#x09;}&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;private static void sortEmployee(Map&lt;Integer, Employee&gt; empMap) {&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;Map&lt;Integer, Employee&gt; sortedMapTest = empMap.entrySet().stream().sorted((emp1,emp2)-&gt;&#x0D;&#x0A;&#x09;&#x09;emp1.getValue().getSalary().compareTo(emp2.getValue().getSalary())).collect(Collectors&#x0D;&#x0A;&#x09;&#x09;&#x09;&#x09;.toMap(Map.Entry::getKey,Map.Entry::getValue,(emp1,emp2)-&gt; emp1, LinkedHashMap::new));&#x0D;&#x0A;&#x09;&#x09;sortedMapTest.forEach((key, value) -&gt; System.out.println(key + &quot;:&quot; + value));&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;Map&lt;Integer,Employee&gt; sortedNewMap = empMap.entrySet().stream().sorted((e1,e2)-&gt;&#x0D;&#x0A;        e1.getValue().getSalary().compareTo(e2.getValue().getSalary()))&#x0D;&#x0A;        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,&#x0D;&#x0A;                (e1, e2) -&gt; e1, LinkedHashMap::new));&#x0D;&#x0A;&#x09;&#x09;sortedNewMap.forEach((key, value) -&gt; System.out.println(key + &quot;:&quot; + value));&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;}&#x0D;&#x0A;&#x09;private static void sortMap(Map&lt;Integer, String&gt; unSortMap) {&#x0D;&#x0A;&#x09;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;Map&lt;Integer, String&gt; sortedMap = unSortMap.entrySet()&#x0D;&#x0A;&#x09;    .stream()&#x0D;&#x0A;&#x09;    .sorted(Map.Entry.comparingByValue())&#x0D;&#x0A;&#x09;    .collect(Collectors.toMap(&#x0D;&#x0A;&#x09;        Map.Entry::getKey,&#x0D;&#x0A;&#x09;        Map.Entry::getValue,&#x0D;&#x0A;&#x09;        (oldValue, newValue) -&gt; oldValue, LinkedHashMap::new));&#x0D;&#x0A;&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;&#x09;sortedMap.forEach((key, value)-&gt; System.out.println(key + &quot;:&quot; + value));&#x0D;&#x0A;&#x09;}&#x0D;&#x0A;&#x09;&#x0D;&#x0A;&#x09;private static void sortEmployeeListByNmae(List&lt;Employee&gt; emp) {&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;List&lt;Employee&gt; sortedEmpList = emp.stream().sorted(Comparator.comparing(Employee::getName)).collect(Collectors.toList());&#x0D;&#x0A;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;System.out.print(sortedEmpList);&#x0D;&#x0A;&#x09;}&#x0D;&#x0A;}"/>
+		<item key="PATH_FILTER" value=""/>
+		<item key="CASE_SENSITIVE" value="true"/>
+		<item key="KEEP_OPEN" value="false"/>
+		<list key="COLUMN_WIDTHS">
+			<item value="40"/>
+			<item value="400"/>
+			<item value="98"/>
+		</list>
+		<list key="SASH_WEIGHTS">
+			<item value="714"/>
+			<item value="285"/>
+		</list>
+		<section name="DialogBoundsSettings">
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_WIDTH" value="600"/>
+			<item key="DIALOG_X_ORIGIN" value="671"/>
+			<item key="DIALOG_Y_ORIGIN" value="182"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\user\Documents\interview\TestCoreJava\bin"/>
+		</list>
+		<section name="SmartImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="479"/>
+			<item key="DIALOG_Y_ORIGIN" value="11"/>
+			<item key="DIALOG_WIDTH" value="984"/>
+			<item key="DIALOG_HEIGHT" value="837"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+</section>

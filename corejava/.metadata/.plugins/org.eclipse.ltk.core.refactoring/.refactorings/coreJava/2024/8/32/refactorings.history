@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;swaps&apos; in &apos;com.corejava.basicPractice.CountInversionsUsingMergeSort.mergeAndCount(...)&apos; to &apos;count&apos;&#x0D;&#x0A;- Original project: &apos;coreJava&apos;&#x0D;&#x0A;- Original element: &apos;com.corejava.basicPractice.CountInversionsUsingMergeSort.mergeAndCount(int[], int, int, int).swaps&apos;&#x0D;&#x0A;- Renamed element: &apos;swaps&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;swaps&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.corejava.basicPractice{CountInversionsUsingMergeSort.java[CountInversionsUsingMergeSort~mergeAndCount~\[I~I~I~I@swaps!997!1033!1024!1028!I!0!false" name="count" references="true" stamp="1723228187969" version="1.0"/>
+</session>
